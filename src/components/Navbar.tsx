@@ -8,8 +8,24 @@ import { useState } from "react"
 import { ShoppingCart, Menu, ChevronDown, X, Home, Package } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { motion, AnimatePresence } from "framer-motion"
+import { Oswald } from "next/font/google"
 import CartDrawer from "./CartDrawer"
 import Image from "next/image"
+
+const display = Oswald({
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+  variable: "--font-display",
+})
+
+const smallNotch = {
+  clipPath:
+    "polygon(0 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%)",
+}
+
+const tagNotch = {
+  clipPath: "polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%)",
+}
 
 export default function Navbar() {
   const pathname = usePathname()
@@ -21,32 +37,39 @@ export default function Navbar() {
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0)
   const categories = ["Parachute", "Rexine", "Car Top Cover", "Rain Suites"]
 
-  return (
-    <header className="bg-[#1E1E1E] shadow-md sticky top-0 z-50">
-      <div className="max-w-6xl mx-auto px-4 py-2 flex justify-between items-center relative">
+  const navLink =
+    "relative text-[#293325] text-sm font-medium py-2 after:absolute after:left-0 after:-bottom-0.5 after:h-[2px] after:w-0 after:bg-[#4CBB17] after:transition-all after:duration-300 hover:after:w-full"
 
-        {/* Logo + text */}
-        <Link href="/" className="flex items-center gap-2 shrink-0">
-          <Image
-            src="/logo.png"
-            alt="Bin Watan"
-            width={40}
-            height={20}
-            className="object-contain"
-          />
-          <span className="text-white font-bold text-lg tracking-wide">
-            BIN <span className="text-[#F97316]">WATAN</span>
+  return (
+    <header className="bg-white border-b-2 border-[#293325] sticky top-0 z-50">
+      <div className="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center relative">
+
+        {/* Wordmark */}
+        <Link href="/" className="flex items-center gap-2.5 shrink-0">
+          <span
+            className="flex items-center justify-center w-9 h-9 bg-[#293325] shrink-0"
+            style={smallNotch}
+          >
+            <Image
+              src="/logo.png"
+              alt="Ubaid Chagharzai"
+              width={20}
+              height={20}
+              className="object-contain"
+            />
+          </span>
+          <span
+            className={`${display.className} text-[#293325] font-semibold text-base sm:text-lg uppercase tracking-tight leading-none`}
+          >
+            Ubaid Chagharzai
           </span>
         </Link>
 
         {/* Desktop Menu */}
-        <nav className="hidden md:flex items-center gap-4 relative">
+        <nav className="hidden md:flex items-center gap-6 relative">
           {/* Home Link */}
-          <Link
-            href="/"
-            className="flex items-center gap-1 text-white bg-transparent hover:text-[#F97316] transition-colors text-sm font-medium"
-          >
-            <Home size={16} /> Home
+          <Link href="/" className={`${navLink} flex items-center gap-1.5`}>
+            <Home size={15} /> Home
           </Link>
 
           {/* Category Dropdown */}
@@ -55,12 +78,9 @@ export default function Navbar() {
             onMouseEnter={() => setCategoryOpen(true)}
             onMouseLeave={() => setCategoryOpen(false)}
           >
-            <Button
-              variant="ghost"
-              className="flex items-center gap-1 text-white bg-transparent hover:bg-transparent hover:text-[#F97316] transition-colors"
-            >
-              Categories <ChevronDown size={16} />
-            </Button>
+            <button className={`${navLink} flex items-center gap-1`}>
+              Categories <ChevronDown size={15} />
+            </button>
 
             <AnimatePresence>
               {categoryOpen && (
@@ -69,14 +89,15 @@ export default function Navbar() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
                   transition={{ duration: 0.2 }}
-                  className="absolute left-0 top-full mt-1 bg-[#1E1E1E] border border-[#E5E7EB] p-2 rounded shadow-md w-36 z-50"
+                  className="absolute left-0 top-full mt-2 bg-[#F3EFE1] border-2 border-[#293325] p-2 w-40 z-50"
+                  style={tagNotch}
                 >
-                  <div className="flex flex-col gap-2">
+                  <div className="flex flex-col gap-1">
                     {categories.map((cat) => (
                       <Link
                         key={cat}
                         href={`/category/${encodeURIComponent(cat)}`}
-                        className="text-white hover:text-[#F97316] text-sm font-medium px-2 py-1 rounded transition-colors"
+                        className="text-[#293325] hover:text-[#48872B] text-sm font-medium px-2 py-1.5 transition-colors"
                       >
                         {cat}
                       </Link>
@@ -87,49 +108,50 @@ export default function Navbar() {
             </AnimatePresence>
           </div>
 
-          <Link
-            href="/orders"
-            className="flex items-center gap-1 text-white bg-transparent hover:text-[#F97316] transition-colors text-sm font-medium"
-          >
-            <Package size={16} /> My Orders
+          <Link href="/orders" className={`${navLink} flex items-center gap-1.5`}>
+            <Package size={15} /> My Orders
           </Link>
 
           {/* Cart */}
-          <Button
-            variant="ghost"
+          <button
             onClick={openCart}
-            className="relative text-white hover:bg-transparent hover:text-[#F97316]"
+            className="relative text-[#293325] hover:text-[#48872B] transition-colors"
           >
-            <ShoppingCart size={18} />
+            <ShoppingCart size={19} />
             {totalItems > 0 && (
-              <span className="absolute -top-1.5 -right-2 text-xs bg-[#F97316] text-white w-4.5 h-4.5 rounded-full flex items-center justify-center">
+              <span
+                className="absolute -top-1.5 -right-2 text-xs bg-[#4CBB17] text-[#1B2415] font-bold w-4.5 h-4.5 flex items-center justify-center"
+                style={smallNotch}
+              >
                 {totalItems}
               </span>
             )}
-          </Button>
+          </button>
         </nav>
 
         {/* Mobile Menu Button */}
-        <div className="md:hidden flex items-center gap-2 text-white">
+        <div className="md:hidden flex items-center gap-3 text-[#293325]">
           {/* Cart */}
-          <Button
-            variant="ghost"
+          <button
             onClick={openCart}
-            className="relative text-white hover:bg-transparent hover:text-[#F97316]"
+            className="relative hover:text-[#48872B] transition-colors"
           >
             <ShoppingCart size={20} />
             {totalItems > 0 && (
-              <span className="absolute -top-1.5 -right-2 text-xs bg-[#F97316] text-white w-4.5 h-4.5 rounded-full flex items-center justify-center">
+              <span
+                className="absolute -top-1.5 -right-2 text-xs bg-[#4CBB17] text-[#1B2415] font-bold w-4.5 h-4.5 flex items-center justify-center"
+                style={smallNotch}
+              >
                 {totalItems}
               </span>
             )}
-          </Button>
+          </button>
 
           {/* Mobile drawer opener */}
           <Button
             variant="ghost"
             onClick={() => setMobileOpen(true)}
-            className="text-white hover:bg-transparent"
+            className="text-[#293325] hover:bg-transparent hover:text-[#48872B]"
           >
             <Menu size={20} />
           </Button>
@@ -153,10 +175,14 @@ export default function Navbar() {
                 animate={{ x: 0 }}
                 exit={{ x: "100%" }}
                 transition={{ type: "tween", duration: 0.25 }}
-                className="fixed top-0 right-0 h-full w-64 bg-[#1E1E1E] shadow-lg z-50 flex flex-col p-4"
+                className="fixed top-0 right-0 h-full w-64 bg-[#293325] shadow-lg z-50 flex flex-col p-4"
               >
                 <div className="flex justify-between items-center mb-4">
-                  <span className="text-white text-lg font-bold">Menu</span>
+                  <span
+                    className={`${display.className} text-white text-lg font-semibold uppercase tracking-wide`}
+                  >
+                    Menu
+                  </span>
                   <Button
                     variant="ghost"
                     onClick={() => setMobileOpen(false)}
@@ -165,12 +191,12 @@ export default function Navbar() {
                     <X size={20} />
                   </Button>
                 </div>
-                <div className="flex flex-col gap-3">
+                <div className="flex flex-col gap-1">
                   {/* Home Link */}
                   <Link
                     href="/"
                     onClick={() => setMobileOpen(false)}
-                    className="flex items-center gap-1 text-white text-base font-medium px-2 py-2 rounded hover:text-[#F97316] transition-colors"
+                    className="flex items-center gap-2 text-white text-base font-medium px-2 py-2 hover:text-[#4CBB17] transition-colors border-b border-dashed border-white/10"
                   >
                     <Home size={16} /> Home
                   </Link>
@@ -180,7 +206,7 @@ export default function Navbar() {
                       key={cat}
                       href={`/category/${encodeURIComponent(cat)}`}
                       onClick={() => setMobileOpen(false)}
-                      className="text-white text-base font-medium px-2 py-2 rounded hover:text-[#F97316] transition-colors"
+                      className="text-white text-base font-medium px-2 py-2 hover:text-[#4CBB17] transition-colors border-b border-dashed border-white/10"
                     >
                       {cat}
                     </Link>
@@ -189,7 +215,7 @@ export default function Navbar() {
                   <Link
                     href="/orders"
                     onClick={() => setMobileOpen(false)}
-                    className="flex items-center gap-2 text-white text-base font-medium px-2 py-2 rounded hover:text-[#F97316] transition-colors"
+                    className="flex items-center gap-2 text-white text-base font-medium px-2 py-2 hover:text-[#4CBB17] transition-colors"
                   >
                     <Package size={16} /> My Orders
                   </Link>

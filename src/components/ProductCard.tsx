@@ -8,10 +8,30 @@ import { formatPrice } from "@/lib/format-price"
 import { Button } from "@/components/ui/button"
 import { useRouter } from "next/navigation"
 import Image from "next/image"
+import { Oswald } from "next/font/google"
 import { Product } from "@/types/product"
 import { Eye, ShoppingBag, Truck } from "lucide-react"
 import type { MouseEvent } from "react"
 import { buildTikTokProductParams, trackTikTokEvent } from "@/lib/tiktok"
+
+const display = Oswald({
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+  variable: "--font-display",
+})
+
+const cardNotch = {
+  clipPath: "polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 0 100%)",
+}
+
+const tagNotch = {
+  clipPath: "polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%)",
+}
+
+const btnNotch = {
+  clipPath:
+    "polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%)",
+}
 
 type Props = {
   product: Product
@@ -63,13 +83,14 @@ export default function ProductCard({ product }: Props) {
   return (
     <div
       onClick={handleViewProduct}
-      className="group flex h-full cursor-pointer flex-col overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-[0_8px_30px_rgba(15,23,42,0.04)] transition-all duration-300 hover:-translate-y-1 hover:border-slate-200 hover:shadow-[0_20px_50px_rgba(15,23,42,0.08)]"
+      className="group flex h-full cursor-pointer flex-col overflow-hidden border-2 border-[#293325]/15 bg-white transition-all duration-300 hover:-translate-y-1 hover:border-[#293325]"
+      style={cardNotch}
     >
       <div
         className={
           isCarCover
-            ? "relative w-full overflow-hidden bg-[#f4f4f2]"
-            : "relative aspect-[4/5] w-full overflow-hidden bg-[#f4f4f2]"
+            ? "relative w-full overflow-hidden bg-[#F3EFE1]"
+            : "relative aspect-[4/5] w-full overflow-hidden bg-[#F3EFE1]"
         }
       >
         {isCarCover ? (
@@ -91,7 +112,10 @@ export default function ProductCard({ product }: Props) {
           />
         )}
 
-        <div className="absolute left-3 top-3 rounded-full bg-white/90 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-slate-600 shadow-sm backdrop-blur">
+        <div
+          className="absolute left-0 top-3 bg-[#293325] px-3 py-1 text-[10px] font-semibold uppercase tracking-wide text-[#F3EFE1]"
+          style={tagNotch}
+        >
           {product.category}
         </div>
 
@@ -102,18 +126,19 @@ export default function ProductCard({ product }: Props) {
             handleViewProduct()
           }}
           aria-label={`View ${product.name}`}
-          className="absolute right-3 top-3 grid size-10 place-items-center rounded-full bg-white/90 text-slate-900 opacity-100 shadow-sm backdrop-blur transition-all duration-300 hover:bg-slate-950 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-400/70 sm:opacity-0 sm:group-hover:opacity-100 sm:focus-visible:opacity-100"
+          className="absolute right-3 top-3 grid size-10 place-items-center rounded-full bg-white/90 text-[#293325] opacity-100 shadow-sm backdrop-blur transition-all duration-300 hover:bg-[#293325] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4CBB17]/70 sm:opacity-0 sm:group-hover:opacity-100 sm:focus-visible:opacity-100"
         >
           <Eye className="size-4" />
         </button>
 
         {!isCarCover && (
-          <div className="absolute inset-x-0 bottom-0 hidden translate-y-full bg-gradient-to-t from-slate-950/80 via-slate-950/40 to-transparent p-4 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 sm:block">
+          <div className="absolute inset-x-0 bottom-0 hidden translate-y-full bg-gradient-to-t from-[#1B2415]/85 via-[#1B2415]/45 to-transparent p-4 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 sm:block">
             <div className="flex gap-2">
               <Button
                 onClick={handleAddToCart}
                 size="sm"
-                className="h-10 flex-1 rounded-full bg-white text-sm font-semibold text-slate-950 hover:bg-white/90"
+                className="h-10 flex-1 rounded-none bg-white text-sm font-semibold text-[#293325] hover:bg-[#F3EFE1]"
+                style={btnNotch}
               >
                 <ShoppingBag className="size-4" />
                 Add to Cart
@@ -122,7 +147,8 @@ export default function ProductCard({ product }: Props) {
                 onClick={handleBuyNow}
                 size="sm"
                 variant="outline"
-                className="h-10 flex-1 rounded-full border-white/80 bg-transparent text-sm font-semibold text-white hover:bg-white/10 hover:text-white"
+                className="h-10 flex-1 rounded-none border-white/80 bg-transparent text-sm font-semibold text-white hover:bg-white/10 hover:text-white"
+                style={btnNotch}
               >
                 Buy Now
               </Button>
@@ -134,49 +160,52 @@ export default function ProductCard({ product }: Props) {
       <div className="flex flex-1 flex-col p-5">
         <div className="flex items-start justify-between gap-4">
           <div className="min-w-0">
-            <h2 className="truncate text-base font-semibold tracking-tight text-slate-950">
+            <h2
+              className={`${display.className} truncate text-base font-semibold tracking-tight text-[#293325]`}
+            >
               {product.name}
             </h2>
-            <div className="mt-2 flex items-center gap-1.5 text-xs font-medium text-emerald-700">
+            <div className="mt-2 flex items-center gap-1.5 text-xs font-medium text-[#48872B]">
               <Truck className="size-3.5" />
               Free delivery
             </div>
           </div>
           <div className="shrink-0 text-right">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-slate-400">
+            <p className="text-[10px] font-semibold uppercase tracking-wide text-[#293325]/40">
               Price
             </p>
-            <p className="text-base font-bold tabular-nums text-orange-500">
+            <p
+              className={`${display.className} text-base font-semibold tabular-nums text-[#293325]`}
+            >
               {formatPrice(product.price)}
             </p>
           </div>
         </div>
 
-        <div className="mt-4 flex items-center justify-between gap-3 border-t border-slate-100 pt-4">
+        <div className="mt-4 flex items-center justify-between gap-3 border-t border-dashed border-[#293325]/20 pt-4">
           <div className="flex items-center -space-x-1">
             {visibleColors.map((color) => (
               <span
                 key={`${product.id}-${color.name}`}
                 title={color.name}
-                className="size-5 rounded-full border-2 border-white shadow ring-1 ring-slate-200"
+                className="size-5 rounded-full border-2 border-white shadow ring-1 ring-[#293325]/15"
                 style={{ backgroundColor: colorMap[color.name] || "#e5e7eb" }}
               />
             ))}
             {extraColorCount > 0 && (
-              <span className="ml-2 text-xs font-semibold text-slate-500">
+              <span className="ml-2 text-xs font-semibold text-[#293325]/60">
                 +{extraColorCount}
               </span>
             )}
           </div>
-          <span className="text-xs font-medium text-slate-500">
-            {product.colors.length} colors
-          </span>
+        
         </div>
 
         <div className={isCarCover ? "mt-5 grid grid-cols-2 gap-2" : "mt-5 grid grid-cols-2 gap-2 sm:hidden"}>
           <Button
             onClick={handleAddToCart}
-            className="h-11 w-full rounded-full bg-slate-950 px-3 text-sm font-semibold text-white hover:bg-slate-800"
+            className="h-11 w-full rounded-none bg-[#293325] px-3 text-sm font-semibold text-white hover:bg-[#39542C]"
+            style={btnNotch}
           >
             <ShoppingBag className="size-4" />
             Add to Cart
@@ -184,7 +213,8 @@ export default function ProductCard({ product }: Props) {
           <Button
             onClick={handleBuyNow}
             variant="outline"
-            className="h-11 w-full rounded-full border-slate-950 px-3 text-sm font-semibold text-slate-950 hover:bg-orange-50 hover:text-orange-600"
+            className="h-11 w-full rounded-none border-[#293325] px-3 text-sm font-semibold text-[#293325] hover:bg-[#4CBB17]/10 hover:text-[#293325]"
+            style={btnNotch}
           >
             Buy Now
           </Button>

@@ -2,97 +2,168 @@
 
 import Image from "next/image"
 import { motion } from "framer-motion"
-import { ArrowRight, Play, Star } from "lucide-react"
+import { Oswald, Work_Sans } from "next/font/google"
+import { ArrowRight, Play, Droplet, ShieldCheck, Users } from "lucide-react"
+
+const display = Oswald({
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+  variable: "--font-display",
+})
+
+const body = Work_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-body",
+})
+
+const notch = {
+  clipPath:
+    "polygon(0 0, calc(100% - 22px) 0, 100% 22px, 100% 100%, 0 100%)",
+}
+
+const smallNotch = {
+  clipPath:
+    "polygon(0 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%)",
+}
+
+const stitchTexture = {
+  backgroundImage:
+    "repeating-linear-gradient(135deg, rgba(41,51,37,0.05) 0px, rgba(41,51,37,0.05) 1px, transparent 1px, transparent 14px)",
+}
 
 export default function Hero() {
   return (
-    <section className="relative w-full bg-[#1E1E1E] overflow-hidden min-h-[85vh] flex items-center pt-10">
-      
-      {/* 🌫️ Background Texture & Lighting */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute top-0 left-0 w-full h-full opacity-10" 
-             style={{ backgroundImage: `radial-gradient(#F97316 0.5px, transparent 0.5px)`, backgroundSize: '30px 30px' }} />
-        <div className="absolute top-[-20%] right-[-10%] w-[500px] h-[500px] bg-[#F97316]/10 blur-[120px] rounded-full" />
-        <div className="absolute bottom-[-10%] left-[-10%] w-[400px] h-[400px] bg-white/5 blur-[100px] rounded-full" />
-      </div>
+    <section
+      className={`${body.className} relative w-full bg-[#F3EFE1] overflow-hidden`}
+    >
+      {/* Canvas texture */}
+      <div className="absolute inset-0 z-0" style={stitchTexture} />
 
-      <div className="container mx-auto px-6 md:px-12 lg:px-20 relative z-10">
-        <div className="flex flex-col-reverse md:flex-row items-center justify-between gap-12">
-          
-          {/* 📝 Left Side: Text Content */}
+      <div className="container mx-auto px-6 md:px-12 lg:px-20 relative z-10 pt-16 pb-14">
+        <div className="flex flex-col-reverse md:flex-row items-center justify-between gap-16">
+          {/* Left: Copy */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="flex-1 text-center md:text-left"
+            transition={{ duration: 0.7 }}
+            className="flex-1 w-full"
           >
-            {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#F97316]/10 border border-[#F97316]/20 mb-6">
-              <Star size={14} className="text-[#F97316] fill-[#F97316]" />
-              <span className="text-xs font-bold uppercase tracking-widest text-[#F97316]">Premium Collection</span>
+            {/* Tag label */}
+            <div
+              className="inline-flex items-center gap-2 bg-[#293325] text-[#F3EFE1] px-4 py-2 mb-8"
+              style={smallNotch}
+            >
+              <Droplet size={13} className="text-[#4CBB17]" />
+              <span className="text-xs font-medium tracking-wide">
+                New stock in for monsoon season
+              </span>
             </div>
 
-            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black text-white leading-[0.9] uppercase italic tracking-tighter mb-6">
-              Ride in <br />
-              <span className="text-[#F97316] drop-shadow-[0_2px_10px_rgba(249,115,22,0.3)]">Style & Comfort</span>
+            <h1
+              className={`${display.className} text-5xl sm:text-6xl lg:text-7xl font-bold text-[#293325] uppercase leading-[0.95] tracking-tight mb-3`}
+            >
+              Geared for
+              <br />
+              every monsoon
             </h1>
+            <div className="w-20 h-1.5 bg-[#4CBB17] mb-6" />
 
-            <p className="text-gray-400 text-base md:text-xl max-w-lg mb-10 leading-relaxed font-light">
-              Elevate your journey with our <span className="text-white font-medium">professional-grade</span> bike seat covers. Engineered for durability, designed for the bold.
+            <p className="text-[#293325]/70 text-base md:text-lg max-w-md mb-9 leading-relaxed">
+              Rexine and parachute-grade covers, cut and stitched for
+              Karachi&apos;s roads and its rain. Made to outlast the season,
+              not just survive it.
             </p>
 
-           
+            {/* CTAs */}
+            <div className="flex flex-wrap items-center gap-4 mb-12">
+              <button
+                className="group inline-flex items-center gap-2 bg-[#4CBB17] hover:bg-[#48872B] text-[#1B2415] hover:text-white px-7 py-4 text-sm font-semibold transition-colors duration-300"
+                style={smallNotch}
+              >
+                Shop the collection
+                <ArrowRight
+                  size={16}
+                  className="transition-transform duration-300 group-hover:translate-x-1"
+                />
+              </button>
 
-            {/* Stats */}
-            <div className="mt-12 pt-8 border-t border-white/10 flex gap-8 justify-center md:justify-start pb-8">
-              <div>
-                <div className="text-2xl font-bold text-white">100k+</div>
-                <div className="text-xs text-gray-500 uppercase tracking-widest">Customers</div>
-              </div>
-              <div>
-                <div className="text-2xl font-bold text-white">4.7/4K</div>
-                <div className="text-xs text-gray-500 uppercase tracking-widest">User Rating</div>
-              </div>
+              <button className="group inline-flex items-center gap-3 text-[#293325] px-1 py-4 text-sm font-semibold">
+                <span className="flex items-center justify-center w-9 h-9 rounded-full border-2 border-[#293325] group-hover:bg-[#293325] group-hover:text-[#F3EFE1] transition-colors duration-300">
+                  <Play size={12} className="fill-current ml-0.5" />
+                </span>
+                See it in the rain
+              </button>
+            </div>
+
+            {/* Spec strip */}
+            <div className="flex items-stretch border-t border-dashed border-[#293325]/30 pt-6 max-w-lg">
+              {[
+                { icon: Droplet, value: "10,000mm", label: "Waterproof rating" },
+                { icon: ShieldCheck, value: "Reinforced", label: "Stitched seams" },
+                { icon: Users, value: "100k+", label: "Riders equipped" },
+              ].map((spec, i) => (
+                <div
+                  key={spec.label}
+                  className={`flex-1 ${
+                    i > 0 ? "border-l border-dashed border-[#293325]/30 pl-5 ml-5" : ""
+                  }`}
+                >
+                  <spec.icon size={16} className="text-[#48872B] mb-2" />
+                  <div
+                    className={`${display.className} text-lg font-semibold text-[#293325] leading-none`}
+                  >
+                    {spec.value}
+                  </div>
+                  <div className="text-xs text-[#293325]/60 mt-1">
+                    {spec.label}
+                  </div>
+                </div>
+              ))}
             </div>
           </motion.div>
 
-          {/* 📸 Right Side: Image with Floating Elements */}
+          {/* Right: Mounted product panel */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
+            initial={{ opacity: 0, scale: 0.94 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, ease: "easeOut" }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
             className="flex-1 relative flex justify-center items-center w-full"
           >
-            {/* Floating Info Card */}
-            <motion.div 
-              animate={{ y: [0, -10, 0] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -top-4 -right-4 z-20 bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/10 hidden lg:block"
+            <div
+              className="relative  md:p-0 -rotate-2  border-[#293325]/80"
+              style={{
+                ...notch,
+                boxShadow: "14px 16px 0px 0px rgba(41,51,37,0.9)",
+              }}
             >
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-[#F97316] rounded-lg flex items-center justify-center text-white">
-                  <Star size={20} fill="white" />
-                </div>
-                <div>
-                  <div className="text-sm font-bold text-white uppercase italic">Waterproof</div>
-                  <div className="text-[10px] text-gray-400">All-weather Protection</div>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Glowing Aura */}
-            <div className="absolute w-[80%] h-[80%] bg-[#F97316]/20 rounded-full blur-[100px] z-0" />
-
-            <div className="relative z-10 group">
               <Image
-                src="/bannerr.png"
+                src="/images/black-display.jpeg"
                 alt="Bin Watan Bike Seat Cover"
-                width={700}
-                height={550}
+                width={620}
+                height={480}
                 priority
-                className="w-full h-auto object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.8)] transition-transform duration-500 group-hover:scale-105"
+                className="w-full max-w-[420px] h-auto object-contain"
               />
             </div>
+
+            {/* Ink stamp */}
+            <motion.div
+              initial={{ opacity: 0, rotate: -18, scale: 0.8 }}
+              animate={{ opacity: 1, rotate: -10, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.5 }}
+              className="absolute -bottom-4 -left-4 md:left-2 md:-bottom-6 z-20 w-28 h-28 rounded-full bg-[#F3EFE1] border-2 border-dashed border-[#293325] flex flex-col items-center justify-center text-center px-3"
+            >
+              <span className="text-[10px] font-bold uppercase tracking-wide text-[#293325] leading-tight">
+                Field
+                <br />
+                Tested
+              </span>
+              <span className="w-6 h-[2px] bg-[#4CBB17] my-1" />
+              <span className="text-[9px] font-medium text-[#48872B] uppercase tracking-wide">
+                All-weather
+              </span>
+            </motion.div>
           </motion.div>
         </div>
       </div>
