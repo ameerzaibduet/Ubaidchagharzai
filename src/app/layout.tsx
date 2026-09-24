@@ -7,12 +7,12 @@ import { CartProvider } from "@/context/CartContext"
 import WhatsappButton from "@/components/ui/WhatsappButton"
 
 export const metadata: Metadata = {
-  title: "Bin Watan",
+  title: "Ubaidify",
   description: "Premium Bike Seat Covers by Bin Watan",
   icons: {
-    icon: "/binwatan.jpeg",
-    shortcut: "/binwatan.jpeg",
-    apple: "/binwatan.jpeg",
+    icon: "/logo.png",
+    shortcut: "/logo.png",
+    apple: "/logo.png",
   },
 }
 
