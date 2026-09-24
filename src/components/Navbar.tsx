@@ -41,20 +41,20 @@ export default function Navbar() {
     "relative text-[#293325] text-sm font-medium py-2 after:absolute after:left-0 after:-bottom-0.5 after:h-[2px] after:w-0 after:bg-[#4CBB17] after:transition-all after:duration-300 hover:after:w-full"
 
   return (
-    <header className="bg-white border-b-2 border-[#293325] sticky top-0 z-50">
+    <header className="sticky top-0 z-50 border-b border-[#293325]/15 bg-[#F8F5EE] shadow-sm shadow-[#293325]/5">
       <div className="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center relative">
 
         {/* Wordmark */}
         <Link href="/" className="flex items-center gap-2.5 shrink-0">
           <span
-            className="flex items-center justify-center w-9 h-9 bg-[#293325] shrink-0"
+            className="flex items-center justify-center w-10 h-10 shrink-0"
             style={smallNotch}
           >
             <Image
               src="/logo.png"
               alt="Ubaid Chagharzai"
-              width={20}
-              height={20}
+              width={36}
+              height={36}
               className="object-contain"
             />
           </span>

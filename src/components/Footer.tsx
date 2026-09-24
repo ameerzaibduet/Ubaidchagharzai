@@ -210,7 +210,7 @@ export default function Footer() {
                   </p>
 
                   <span className="mt-1 block text-white/75">
-                    0348 3016937
+                    
                   </span>
                 </div>
 
@@ -242,7 +242,7 @@ export default function Footer() {
                   </p>
 
                   <span className="mt-1 block text-white/75">
-                    binwatan@gmail.com
+                    ubaidkhan@gmail.com
                   </span>
                 </div>
 

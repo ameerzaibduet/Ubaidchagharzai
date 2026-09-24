@@ -22,24 +22,26 @@ export default function OrderSuccessPage() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-emerald-50/60 to-white px-4 py-10">
+    <div className="min-h-screen bg-[#F3EFE1] px-4 py-10 text-[#293325]">
       <div className="mx-auto max-w-lg">
-        <div className="rounded-3xl border border-emerald-100 bg-white p-6 shadow-lg sm:p-8">
+        <div className="rounded-[28px] border border-[#293325]/10 bg-white p-6 shadow-[0_24px_80px_rgba(41,51,37,0.08)] sm:p-8">
           <div className="text-center">
-            <CheckCircle className="mx-auto size-16 text-emerald-500" />
-            <h1 className="mt-4 text-2xl font-black text-slate-900">Order placed!</h1>
-            <p className="mt-2 text-sm text-slate-600">
+            <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-[#E9F7D9]">
+              <CheckCircle className="size-14 text-[#4CBB17]" />
+            </div>
+            <h1 className="mt-4 text-2xl font-black uppercase tracking-tight text-[#293325]">Order placed!</h1>
+            <p className="mt-2 text-sm text-[#293325]/70">
               Thank you. We have received your order and will contact you soon.
             </p>
           </div>
 
           {order ? (
-            <div className="mt-6 rounded-2xl border border-slate-100 bg-slate-50 p-4">
+            <div className="mt-6 rounded-2xl border border-[#293325]/10 bg-[#F8F7F4] p-4">
               <div className="mb-3 flex items-center justify-between">
-                <p className="text-xs font-bold uppercase tracking-wider text-slate-500">
+                <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#48872B]">
                   Order details
                 </p>
-                <span className="font-mono text-[10px] text-slate-400">
+                <span className="font-mono text-[10px] text-[#293325]/60">
                   #{order.id.slice(0, 8).toUpperCase()}
                 </span>
               </div>
@@ -63,10 +65,10 @@ export default function OrderSuccessPage() {
                       </div>
                     )}
                     <div className="min-w-0 flex-1">
-                      <p className="truncate text-sm font-semibold text-slate-900">
+                      <p className="truncate text-sm font-semibold text-[#293325]">
                         {item.name}
                       </p>
-                      <p className="text-xs text-slate-500">
+                      <p className="text-xs text-[#293325]/65">
                         {item.quantity} × {formatPrice(item.price)}
                         {item.color ? ` · ${item.color}` : ""}
                       </p>
@@ -75,41 +77,41 @@ export default function OrderSuccessPage() {
                 ))}
               </ul>
 
-              <div className="mt-4 space-y-1 border-t border-slate-200 pt-3 text-sm text-slate-600">
+              <div className="mt-4 space-y-1 border-t border-[#293325]/10 pt-3 text-sm text-[#293325]/70">
                 <p>
-                  <span className="font-medium text-slate-800">Name:</span> {order.name}
+                  <span className="font-medium text-[#293325]">Name:</span> {order.name}
                 </p>
                 <p>
-                  <span className="font-medium text-slate-800">Phone:</span> {order.phone}
+                  <span className="font-medium text-[#293325]">Phone:</span> {order.phone}
                 </p>
                 <p>
-                  <span className="font-medium text-slate-800">Address:</span> {order.address},{" "}
+                  <span className="font-medium text-[#293325]">Address:</span> {order.address},{" "}
                   {order.city}
                 </p>
-                <p className="pt-1 text-base font-black text-orange-500">
+                <p className="pt-1 text-base font-black text-[#4CBB17]">
                   Total: {formatPrice(order.total)}
                 </p>
               </div>
             </div>
           ) : (
-            <p className="mt-6 text-center text-sm text-slate-500">
+            <p className="mt-6 text-center text-sm text-[#293325]/65">
               Your order was placed successfully.
             </p>
           )}
 
-          <div className="mt-8 rounded-2xl border border-orange-100 bg-orange-50/80 p-4">
-            <p className="text-center text-sm font-bold text-orange-800">
+          <div className="mt-8 rounded-2xl border border-[#D8EFC0] bg-[#F4F9EE] p-4">
+            <p className="text-center text-sm font-bold text-[#293325]">
               Track your order anytime
             </p>
 
             <div className="mt-4 flex flex-col items-center gap-2 text-center">
-              <ArrowDown className="size-5 animate-bounce text-orange-500" />
-              <p className="text-xs leading-relaxed text-orange-900/80">
+              <ArrowDown className="size-5 animate-bounce text-[#4CBB17]" />
+              <p className="text-xs leading-relaxed text-[#293325]/70">
                 Open the menu at the top and tap{" "}
-                <span className="font-bold text-orange-600">My Orders</span> to see status
+                <span className="font-bold text-[#48872B]">My Orders</span> to see status
                 updates when your parcel is booked or delivered.
               </p>
-              <div className="mt-2 flex items-center gap-1 rounded-full bg-white px-4 py-2 text-xs font-semibold text-slate-700 shadow-sm">
+              <div className="mt-2 flex items-center gap-1 rounded-full bg-white px-4 py-2 text-xs font-semibold text-[#293325] shadow-sm">
                 Menu
                 <ChevronRight className="size-3.5" />
                 My Orders
@@ -119,14 +121,14 @@ export default function OrderSuccessPage() {
 
           <div className="mt-6 flex flex-col gap-3 sm:flex-row">
             <Link href="/orders" className="flex-1">
-              <Button className="h-12 w-full rounded-2xl bg-orange-500 font-bold hover:bg-orange-600">
+              <Button className="h-12 w-full rounded-2xl bg-[#4CBB17] font-bold text-white hover:bg-[#48872B]">
                 View My Orders
               </Button>
             </Link>
             <Link href="/" className="flex-1">
               <Button
                 variant="outline"
-                className="h-12 w-full rounded-2xl border-2 font-bold"
+                className="h-12 w-full rounded-2xl border-2 border-[#293325]/20 bg-white font-bold text-[#293325] hover:bg-[#F5F7F1]"
               >
                 Continue Shopping
               </Button>

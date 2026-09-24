@@ -181,30 +181,31 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#fafaf9] to-white">
+    <div className="min-h-screen bg-[#F3EFE1] text-[#293325]">
       <div className="mx-auto grid max-w-5xl gap-8 px-4 py-8 lg:grid-cols-[1fr_360px] lg:px-6 lg:py-12">
         <div>
-          <h1 className="text-3xl font-black uppercase tracking-tight text-slate-900">
-            Checkout
+          <p className="text-xs font-bold uppercase tracking-[0.28em] text-[#48872B]">Checkout</p>
+          <h1 className="mt-2 text-3xl font-black uppercase tracking-tight text-[#293325]">
+            Complete your order
           </h1>
-          <p className="mt-2 text-sm text-slate-500">
+          <p className="mt-2 text-sm text-[#293325]/65">
             Complete your details to place the order
           </p>
 
           {errorMsg && (
-            <div className="mt-4 rounded-xl bg-red-50 p-3 text-sm text-red-600">
+            <div className="mt-4 rounded-xl border border-red-200 bg-red-50 p-3 text-sm font-medium text-red-700">
               {errorMsg}
             </div>
           )}
 
-          <div className="mt-6 space-y-4 rounded-2xl border border-slate-100 bg-white p-5 shadow-sm">
+          <div className="mt-6 space-y-4 rounded-[24px] border border-[#293325]/10 bg-white p-5 shadow-[0_18px_50px_rgba(41,51,37,0.05)]">
             <Input
               placeholder="Full name"
               value={name}
               onChange={(e) => setName(e.target.value)}
               name="name"
               autoComplete="name"
-              className="h-12 rounded-xl"
+              className="h-12 rounded-xl border-[#293325]/15 bg-[#F8F7F4] text-[#293325] focus:border-[#4CBB17] focus:ring-[#4CBB17]/20"
             />
 
             <Input
@@ -215,7 +216,7 @@ export default function CheckoutPage() {
               name="phone"
               autoComplete="tel"
               inputMode="tel"
-              className="h-12 rounded-xl"
+              className="h-12 rounded-xl border-[#293325]/15 bg-[#F8F7F4] text-[#293325] focus:border-[#4CBB17] focus:ring-[#4CBB17]/20"
             />
 
             <Input

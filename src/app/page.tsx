@@ -57,7 +57,7 @@ export default function HomePage() {
     },
     {
       name: "Rain Suites",
-      image: "/images/rain-suite-black.png",
+      image: "/images/rain-suite-black2.png",
       href: "/category/Rain%20Suites",
     },
     {
