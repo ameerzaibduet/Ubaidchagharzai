@@ -52,7 +52,7 @@ export default function Navbar() {
           >
             <Image
               src="/logo.png"
-              alt="Ubaid Chagharzai"
+              alt="Ubaidify"
               width={36}
               height={36}
               className="object-contain"
