@@ -24,9 +24,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <head>
+      <body className="flex flex-col min-h-screen">
         {/* Facebook Meta Pixel */}
-        <Script id="facebook-pixel" strategy="afterInteractive">
+        <Script
+          id="facebook-pixel"
+          strategy="afterInteractive"
+        >
           {`
             !function(f,b,e,v,n,t,s)
             {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -48,10 +51,8 @@ export default function RootLayout({
             fbq('track', 'PageView');
           `}
         </Script>
-      </head>
 
-      <body className="flex flex-col min-h-screen">
-        {/* Facebook Meta Pixel - No JavaScript fallback */}
+        {/* Facebook Pixel fallback when JavaScript is disabled */}
         <noscript>
           <img
             height="1"
