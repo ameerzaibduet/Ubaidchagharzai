@@ -9,7 +9,7 @@ import WhatsappButton from "@/components/ui/WhatsappButton"
 
 export const metadata: Metadata = {
   title: "Ubaidify",
-  description: "Premium Bike Seat Covers by Bin Watan",
+  description: "Premium Bike Seat Covers by Ubaidify",
   icons: {
     icon: "/logo.png",
     shortcut: "/logo.png",
